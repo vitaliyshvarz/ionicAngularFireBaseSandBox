@@ -30,6 +30,10 @@ export class HomePage {
           name: 'title',
           placeholder: 'Title'
         },
+        {
+          name: 'author',
+          placeholder: 'Author'
+        },
       ],
       buttons: [
         {
@@ -42,7 +46,8 @@ export class HomePage {
           text: 'Save',
           handler: data => {
             this.songs.push({
-              title: data.title
+              title: data.title,
+              author: data.author
             });
           }
         }
@@ -52,11 +57,10 @@ export class HomePage {
   }
 
   removeSong(songId: string){
-    this.songs.remove(songId)
-      .than(res => console.log(res));
+    this.songs.remove(songId);
   }
-  
-  updateSong(songId, songTitle){
+
+  updateSong(songId, songTitle, author){
     let prompt = this.alertCtrl.create({
       title: 'Song Name',
       message: "Update the name for this song",
@@ -65,6 +69,11 @@ export class HomePage {
           name: 'title',
           placeholder: 'Title',
           value: songTitle
+        },
+        {
+          name: 'author',
+          placeholder: 'author',
+          value: author
         },
       ],
       buttons: [
@@ -78,7 +87,8 @@ export class HomePage {
           text: 'Save',
           handler: data => {
             this.songs.update(songId, {
-              title: data.title
+              title: data.title,
+              author: data.author
             });
           }
         }
@@ -87,7 +97,7 @@ export class HomePage {
     prompt.present();
   }
 
-  showOptions(songId, songTitle) {
+  showOptions(songId, songTitle,author) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'What do you want to do?',
       buttons: [
@@ -100,7 +110,7 @@ export class HomePage {
         },{
           text: 'Update title',
           handler: () => {
-            this.updateSong(songId, songTitle);
+            this.updateSong(songId, songTitle, author);
           }
         },{
           text: 'Cancel',
