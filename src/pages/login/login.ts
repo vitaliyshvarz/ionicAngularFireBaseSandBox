@@ -6,10 +6,6 @@ import { Component } from '@angular/core';
 })
 export class LoginPage {
 
-  songs: FirebaseListObservable<any>;
-
-  constructor() {
-  }
-
+  constructor() { }
 
 }
