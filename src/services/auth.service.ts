@@ -1,36 +1,65 @@
 import { Injectable } from '@angular/core';
+import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
+import * as Firebase from 'firebase';
 
-import { AngularFire } from 'angularfire2';
 
 @Injectable()
+
 export class AuthData {
   // Here we declare the variables we'll be using.
   public fireAuth: any;
   public userProfile: any;
+  private _firebase: Firebase;
+
 
   constructor(
-    firebase: AngularFire
+    public af: AngularFire
   ) {
-    this.fireAuth = firebase.auth();
-    this.userProfile = firebase.database().ref('/userProfile');
+    //this.fireAuth = firebase.auth();
+    //this.userProfile = firebase.database().ref('/userProfile');
   }
 
+  public loginUserGoogle() {
+    return this.af.auth.login({
+      provider: AuthProviders.Google,
+      method: AuthMethods.Redirect
+    });
+  }
+
+  public loginUserFacebook() {
+    return this.af.auth.login({
+      provider: AuthProviders.Facebook,
+      method: AuthMethods.Redirect
+    });
+  }
   public loginUser(email: string, password: string): any {
-    return this.fireAuth.signInWithEmailAndPassword(email, password);
-  }
-
-  public signupUser(email: string, password: string): any {
-    return this.fireAuth.createUserWithEmailAndPassword(email, password)
-      .then((newUser) => {
-        this.userProfile.child(newUser.uid).set({ email: email });
+    return this.af.auth.login({
+      email: email,
+      password: password,
+    },
+      {
+        provider: AuthProviders.Password,
+        method: AuthMethods.Password,
       });
   }
 
-  public resetPassword(email: string): any {
-    return this.fireAuth.sendPasswordResetEmail(email);
+  public signupUser(email: string, password: string): any {
+    //
+  }
+
+  public resetPassword(email): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this._firebase.resetPassword(email, error => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve();
+        }
+      });
+    });
   }
 
   public logoutUser(): any {
-    return this.fireAuth.signOut();
+    return this.af.auth.logout();
   }
 }

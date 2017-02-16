@@ -1,7 +1,12 @@
 <ion-header>
   <ion-navbar>
+
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
     <ion-title>
-      Ionic Blank
+      Home Page
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="addSong()">
@@ -12,10 +17,13 @@
 </ion-header>
 
 <ion-content padding>
+
   <ion-list>
     <ion-item *ngFor="let song of songs | async" (click)="showOptions(song.$key, song.title, song.author)">
       <h4>Song Name: {{song.title}}</h4>
       Author: {{song.author}}
+
+
     </ion-item>
   </ion-list>
 </ion-content>
