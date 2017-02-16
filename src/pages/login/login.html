@@ -7,8 +7,6 @@
 </ion-header>
 
 <ion-content padding>
-  <img src="http://placehold.it/300x100">
-
   <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
 
     <ion-item>
@@ -36,20 +34,20 @@
     </button>
 
   </form>
+  <ion-row>
+      <ion-col width-50>
+        <button ion-button full  color="danger" (click)="loginGoogle()">Use My Google Account</button>
+      </ion-col>
+      <ion-col width-50>
+        <button ion-button full (click)="loginFacebook()">Use My Facebook Account</button>
+      </ion-col>
+  </ion-row>
 
-  <button md-raised-button (click)="loginGoogle()">
-    <img width="30" src="google-logo.png" />Use My Google Account
+  <button ion-button block clear (click)="goToSignup()">
+    Create a new account
   </button>
 
-  <button md-raised-button (click)="loginFacebook()">
-    <img width="30" src="google-logo.png" />Use My Facebook Account
+  <button ion-button block clear (click)="goToResetPassword()">
+    I forgot my password
   </button>
-
-    <button ion-button block clear (click)="goToSignup()">
-      Create a new account
-    </button>
-
-    <button ion-button block clear (click)="goToResetPassword()">
-      I forgot my password
-    </button>
 </ion-content>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+
 import {
   NavController,
   AlertController,
@@ -11,14 +11,14 @@ import {
 })
 export class HomePage {
 
-  songs: FirebaseListObservable<any>;
+  public songs;
 
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
-    af: AngularFire) {
-      this.songs = af.database.list('/songs');
+  ) {
+      this.songs = [];
   }
 
   addSong(){

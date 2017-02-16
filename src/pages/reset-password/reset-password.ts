@@ -12,6 +12,7 @@ import { AuthData } from '../../services/auth.service';
 })
 export class ResetPasswordPage {
   public resetPasswordForm;
+  submitAttempt: boolean = false;
 
 
   constructor(

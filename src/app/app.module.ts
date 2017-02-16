@@ -9,22 +9,19 @@ import { ResetPasswordPage } from '../pages/reset-password/reset-password'
 
 import { AuthData } from '../services/auth.service';
 
-// Import the AF2 Module
-import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+// Import the firebase Module
+ import * as Firebase from 'firebase';
 
-// AF2 Settings
-export const firebaseConfig = {
-  apiKey: "AIzaSyBbI2tXZ1OinqvMVCaX5jEpd_33jivacb8",
-  authDomain: "testapp-f17a3.firebaseapp.com",
-  databaseURL: "https://testapp-f17a3.firebaseio.com",
-  storageBucket: "testapp-f17a3.appspot.com",
-  messagingSenderId: "447020549120"
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyBXJdmFDX4viPCnjDMFFs1tmvXObbcJ200",
+  authDomain: "eatlikepro-c3c21.firebaseapp.com",
+  databaseURL: "https://eatlikepro-c3c21.firebaseio.com",
+  storageBucket: "eatlikepro-c3c21.appspot.com",
+  messagingSenderId: "1022163181712"
 };
 
-const firebaseAuthConfig = {
-  provider: AuthProviders.Google,
-  method: AuthMethods.Redirect
-};
+Firebase.initializeApp(config);
 
 @NgModule({
   declarations: [
@@ -36,7 +33,6 @@ const firebaseAuthConfig = {
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

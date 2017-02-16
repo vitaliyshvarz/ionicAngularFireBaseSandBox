@@ -7,7 +7,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AuthData } from '../../services/auth.service';
 import { RegisterPage } from '../register/register';
 import { HomePage } from '../home/home';
-//import { ResetPasswordPage } from '../reset-password/reset-password';
+import { ResetPasswordPage } from '../reset-password/reset-password';
 
 @Component({
   selector: 'page-login',
@@ -68,10 +68,10 @@ export class LoginPage {
       });
     });
 
-    this.loading = this.loadingCtrl.create({
-      dismissOnPageChange: true,
+    this.loading = this.loadingCtrl.create();
+    this.loading.present().then(() => {
+      this.loading.dismiss();
     });
-    this.loading.present();
   }
 
   loginGoogle() {
@@ -94,10 +94,10 @@ export class LoginPage {
       });
     });
 
-    this.loading = this.loadingCtrl.create({
-      dismissOnPageChange: true,
+    this.loading = this.loadingCtrl.create();
+    this.loading.present().then(() => {
+      this.loading.dismiss();
     });
-    this.loading.present();
   }
   /**
    * If the form is valid it will call the AuthData service to log the user in displaying a loading component while
@@ -115,6 +115,7 @@ export class LoginPage {
       this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password).then(authData => {
         this.nav.setRoot(HomePage);
       }, error => {
+        console.log('Wwwww')
         this.loading.dismiss().then(() => {
           let alert = this.alertCtrl.create({
             message: error.message,
@@ -129,10 +130,10 @@ export class LoginPage {
         });
       });
 
-      this.loading = this.loadingCtrl.create({
-        dismissOnPageChange: true,
+      this.loading = this.loadingCtrl.create();
+      this.loading.present().then(() => {
+        this.loading.dismiss();
       });
-      this.loading.present();
     }
   }
 
@@ -141,7 +142,7 @@ export class LoginPage {
   }
 
   goToResetPassword() {
-    //this.nav.push(ResetPasswordPage);
+    this.nav.push(ResetPasswordPage);
   }
 
 }
